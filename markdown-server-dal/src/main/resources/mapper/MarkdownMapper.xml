@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.notes.markdown.mapper.MarkdownMapper">
+    <update id="deleteMarkdown">
+        update markdown set
+            status = 0
+        where id = #{id}
+    </update>
+    <update id="deleteMarkdownBack">
+        update markdown set
+            status = 1
+        where id = #{id}
+    </update>
+    <update id="updateMarkdown">
+        update markdown
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title != '' and title != null">
+                title = #{title},
+            </if>
+            <if test="mkContext != '' and mkContext != null">
+                mk_context = #{mkContext},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+    <select id="countMarkdown" parameterType="java.util.Map" resultType="int">
+        select count(*)
+        from markdown
+        <trim prefix="where" suffixOverrides=" and">
+            <if test="params.status != '' and params.status != null">
+                status = ${params.status} and
+            </if>
+            <if test="params.search != '' and params.search != null">
+                title like '%%${params.search}%%' or
+                mk_context like '%%${params.search}%%' and
+            </if>
+        </trim>
+    </select>
+</mapper>

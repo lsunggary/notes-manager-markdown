@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>markdown-server-control</module>
+        <module>markdown-server-common</module>
+        <module>markdown-server-dal</module>
+        <module>markdown-server-integration</module>
+        <module>markdown-server-service</module>
+        <module>markdown-server-facade</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.notes</groupId>
+    <artifactId>markdown-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>markdown-server</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <markdown-server.version>0.0.1-SNAPSHOT</markdown-server.version>
+        <java.version>11</java.version>
+        <spring-cloud.version>Hoxton.RC1</spring-cloud.version>
+        <netty-all.version>4.1.25.Final</netty-all.version>
+        <fastjson.version>1.2.31</fastjson.version>
+        <mybatis.version>2.1.0</mybatis.version>
+        <pagehelper.version>1.2.12</pagehelper.version>
+        <tk.mybatis.version>2.0.0</tk.mybatis.version>
+        <!-- mysql链接池 -->
+        <druid.version>1.1.19</druid.version>
+        <mysql.connector.version>8.0.17</mysql.connector.version>
+
+        <!-- httpClient -->
+        <httpClient.version>4.5.9</httpClient.version>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!--注册中心 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <!--添加feign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>2.1.2.RELEASE</version>
+        </dependency>
+
+        <!--添加hystrix服务降级 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
+        <!--添加tk-mapper依赖-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>${tk.mybatis.version}</version>
+        </dependency>
+
+        <!-- spring-boot mybatis依赖 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+
+        <!--mysql依赖-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.version}</version>
+        </dependency>
+
+        <!--druid依赖mysql连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <!--lombok依赖-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!--分页依赖-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.notes</groupId>
+                <artifactId>markdown-server-common</artifactId>
+                <version>${markdown-server.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.notes</groupId>
+                <artifactId>markdown-server-dal</artifactId>
+                <version>${markdown-server.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.notes</groupId>
+                <artifactId>markdown-server-control</artifactId>
+                <version>${markdown-server.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.notes</groupId>
+                <artifactId>markdown-server-facade</artifactId>
+                <version>${markdown-server.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.notes</groupId>
+                <artifactId>markdown-server-integration</artifactId>
+                <version>${markdown-server.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.notes</groupId>
+                <artifactId>markdown-server-service</artifactId>
+                <version>${markdown-server.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
+
+</project>

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: markdown-server-application
+  cloud:
+    config:
+      uri: http://106.13.230.143:9902
+      profile: dev
+      label: master
+    inetutils:
+      timeout-seconds: 30
+  main:
+    allow-bean-definition-overriding: true
